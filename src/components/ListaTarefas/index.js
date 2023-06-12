@@ -1,4 +1,5 @@
 import { useState } from "react";
+import TarefasFeitas from "../TarefasFeitas/TarefasFeitas";
 import {
   InputContainer,
   ListaContainer,
@@ -12,8 +13,10 @@ import {
 import bin from "../../assets/bin.png";
 
 export function ListaTarefas() {
-  const [lista, setLista] = useState(["Fazer exercícios", "Estudar React"]);
+  const [lista, setLista] = useState([]);
   const [novaTarefa, setNovaTarefa] = useState("");
+  const [tarefasFeitas, setTarefasFeitas] = useState([]);
+
 
   const onChangeTarefa = (event) => {
     setNovaTarefa(event.target.value);
@@ -26,9 +29,18 @@ export function ListaTarefas() {
   };
 
   const removeTarefa = (tarefa) => {
-    const listaFiltrada = lista.filter((item) => item !== tarefa);
-    setLista(listaFiltrada);
+    const tarefaRemovida = lista.find((item) => item === tarefa);
+    setLista(lista.filter((item) => item !== tarefa));
+    setTarefasFeitas([...tarefasFeitas, tarefaRemovida]);
   };
+  
+
+  const adicionaTarefaTeclaEnter = (event) => {
+    if (event.key === "Enter") {
+      adicionaTarefa();
+    }
+  }
+
 
   return (
     <ListaTarefasContainer>
@@ -37,6 +49,7 @@ export function ListaTarefas() {
           placeholder="Digite aqui uma tarefa"
           value={novaTarefa}
           onChange={onChangeTarefa}
+          onKeyDown={adicionaTarefaTeclaEnter}
         />
         <AddTaskButton onClick={adicionaTarefa}>Adicionar</AddTaskButton>
       </InputContainer>
@@ -54,7 +67,8 @@ export function ListaTarefas() {
           })}
         </ul>
       </ListaContainer>
-      <LinhaHorizontal/>
-    </ListaTarefasContainer>
+      <LinhaHorizontal />
+<TarefasFeitas tarefasFeitas={tarefasFeitas} />
+    </ListaTarefasContainer>     
   );
 }
