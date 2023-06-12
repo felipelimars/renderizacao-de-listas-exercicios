@@ -55,7 +55,7 @@ export const RemoveButton = styled.button`
 `;
 
 export const Tarefa = styled.li`
-  width: 42vw;
+  width: 30vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -73,9 +73,8 @@ export const Tarefa = styled.li`
 
 export const TextoSilver = styled.p`
   color: silver;
-  text-decoration: line-through;
-  text-decoration-color: silver;
 `;
+
 export const LinhaHorizontal = styled.hr`
   width: 100%;
   margin: 16px;
